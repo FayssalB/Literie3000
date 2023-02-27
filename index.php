@@ -44,13 +44,16 @@ var_dump($_POST);
                     <p><?= $matela["modele"] ?></p>
                     <p><?= $matela["prix"] ?>€</p>
                    <a href="details.php?id=<?=$matela["id"]?>">Détails</a>
-                   <a href="delete.php">Delete</a>
+                   <a href="delete.php?id=<?=$matela["id"]?>">Delete</a>
                 </div>
         <?php
             }
         }
         ?>
 
+            <div class="ajout-container">
+                <!-- Background color + logo -->
+            </div>
 
     </div>
 </body>
