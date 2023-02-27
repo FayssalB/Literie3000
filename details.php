@@ -25,8 +25,8 @@ include("templates/header.php");
                 <p><?= $matela["modele"] ?></p>
                 <p><?= $matela["prix"] ?>€</p>
                 <p name="" id="" cols="30" rows="10">Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima rerum inventore quia est, tempore quisquam exercitationem fugiat suscipit aspernatur consequuntur, reprehenderit voluptas maxime dolores a ut. Delectus odio excepturi quis!</p>
-                <a href="edit.php?id=<?= $matela["id"] ?>">Modifier</a>
-                <a href="delete.php?id=<?= $matela["id"] ?>">Supprimer</a>
+                <a class="input" href="edit.php?id=<?= $matela["id"] ?>">Modifier</a>
+                <a class="submit" href="delete.php?id=<?= $matela["id"] ?>">Supprimer</a>
             </div>
         </div>
     <?php

@@ -27,7 +27,7 @@ if (!empty($_POST)) {
     if (empty($image) || empty($fabricant) || empty($modele) || empty($dimension) || empty($prix)) {
         $errors["emptyInput"] = "Tous les champs doivent être renseigné";
     }
-    if(!filter_var($image,FILTER_VALIDATE_URL)){
+    if (!filter_var($image, FILTER_VALIDATE_URL)) {
         $errors["url"] = "L'URL n'est pas valide";
     }
 
@@ -37,7 +37,7 @@ if (!empty($_POST)) {
 
         $query = $db->prepare("UPDATE matelas SET fabricant = '$new_fabricant', image = '$new_image', modele = '$new_modele', prix='$new_prix', dimension ='$new_dimension' WHERE id = $id");
 
-        if($query->execute()){
+        if ($query->execute()) {
             header("Location: details.php?id=$id");
         }
     }
@@ -45,38 +45,45 @@ if (!empty($_POST)) {
 include("templates/header.php");
 ?>
 
-
+<div>
     <h1>Modification d'un produit</h1>
-    <div class="container">
-     <form action="" method="post">
-        <div>
-            <?php
-            if (!empty($errors)) {
-            ?>
-                <p><?= $errors["emptyInput"] ?></p>  
-                <p><?= $errors["url"] ?></p>
-                <!-- Tester au bon endroit -->
-            <?php
-            }
-            ?>
+</div>
+
+
+<form action="" method="post">
+    <div class="add-container">
+        <?php
+        if (!empty($errors)) {
+        ?>
+            <p><?= $errors["emptyInput"] ?></p>
+            <p><?= $errors["url"] ?></p>
+            <!-- Tester au bon endroit -->
+        <?php
+        }
+        ?>
+        <div class="form-group">
             <label for="inputImage">URL de l'image</label>
             <input type="text" name="image" value="<?= isset($image) ? $image : "" ?>">
-
+        </div>
+        <div class="form-group">
             <label for="inputFabricant">Nom du fabricant</label>
             <input type="text" name="fabricant" value="<?= isset($fabricant) ? $fabricant : "" ?>">
-
+        </div>
+        <div class="form-group">
             <label for="inputmodele">Modele</label>
             <input type="text" name="modele" value="<?= isset($modele) ? $modele : "" ?>">
-
+        </div>
+        <div class="form-group">
             <label for="inputDimension">Dimension</label>
             <input type="text" name="dimension" value="<?= isset($dimension) ? $dimension : "" ?>">
-
+        </div>
+        <div class="form-group">
             <label for="inputPrix">Prix</label>
             <input type="number" name="prix" value="<?= isset($prix) ? $prix : "" ?>">
-
-            <input type="submit" value="Modifier le produit">
         </div>
-    </form>
+        <input type="submit" value="Modifier le produit" class="submit">
     </div>
+</form>
 </body>
+
 </html>
