@@ -5,7 +5,7 @@ $db = new PDO($dsn, "root", "");
 $query = $db->query("SELECT * from matelas");
 $matelas = $query->fetchAll(PDO::FETCH_ASSOC);
 
-var_dump($_POST);
+// var_dump($_POST);
 include("templates/header.php");
 ?>
 

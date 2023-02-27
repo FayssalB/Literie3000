@@ -11,7 +11,7 @@
 
 <body>
     <header>
-        <div><a href="index.php">Literie3000</a></div>
+        <div><a href="index.php"><img src="../img/1.png" alt=""> </a></div>
         <div>
             <ul>
                 <li><a href="">Nos produits</a></li>
