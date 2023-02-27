@@ -1,16 +1,30 @@
 <?php
 
+$dsn = "mysql:host=localhost;dbname=literie3000";
+$db = new PDO($dsn, "root", "");
+
+$id = $_GET["id"];
+
+$query = $db->query("SELECT * from matelas WHERE id = $id");
+$matela = $query->fetch(PDO::FETCH_ASSOC);
+
+$image = $matela["image"];
+$fabricant = $matela["fabricant"];
+$modele = $matela["modele"];
+$dimension = $matela["dimension"];
+$prix = $matela["prix"];
+
 if (!empty($_POST)) {
 
-    $image = trim(strip_tags($_POST["image"]));
-    $fabricant = trim(strip_tags($_POST["fabricant"]));
-    $modele = trim(strip_tags($_POST["modele"]));
-    $dimensions = trim(strip_tags($_POST["dimension"]));
-    $prix = trim(strip_tags($_POST["prix"]));
+    $new_image = trim(strip_tags($_POST["image"]));
+    $new_fabricant = trim(strip_tags($_POST["fabricant"]));
+    $new_modele = trim(strip_tags($_POST["modele"]));
+    $new_dimension = trim(strip_tags($_POST["dimension"]));
+    $new_prix = trim(strip_tags($_POST["prix"]));
 
     $errors = [];
 
-    if (empty($image) || empty($fabricant) || empty($modele) || empty($dimensions) || empty($prix)) {
+    if (empty($image) || empty($fabricant) || empty($modele) || empty($dimension) || empty($prix)) {
         $errors["emptyInput"] = "Tous les champs doivent être renseigné";
     }
     if(!filter_var($image,FILTER_VALIDATE_URL)){
@@ -21,24 +35,20 @@ if (!empty($_POST)) {
         $dsn = "mysql:host=localhost;dbname=literie3000";
         $db = new PDO($dsn, "root", "");
 
-        $query = $db->prepare("INSERT INTO matelas(fabricant,modele,dimension,prix,image) VALUES (:fabricant,:modele, :dimension,:prix,:image)");
-        $query->bindParam(":fabricant", $fabricant);
-        $query->bindParam(":modele", $modele);
-        $query->bindParam(":dimension", $dimensions);
-        $query->bindParam(":prix", $prix, PDO::PARAM_INT);
-        $query->bindParam(":image", $image);
+        $query = $db->prepare("UPDATE matelas SET fabricant = '$new_fabricant', image = '$new_image', modele = '$new_modele', prix='$new_prix', dimension ='$new_dimension' WHERE id = $id");
 
         if($query->execute()){
-            header("Location: index.php");
+            header("Location: details.php?id=$id");
         }
     }
 }
-
 include("templates/header.php");
 ?>
 
-    <h1>Ajout d'un produit</h1>
-    <form action="" method="post">
+
+    <h1>Modification d'un produit</h1>
+    <div class="container">
+     <form action="" method="post">
         <div>
             <?php
             if (!empty($errors)) {
@@ -59,14 +69,14 @@ include("templates/header.php");
             <input type="text" name="modele" value="<?= isset($modele) ? $modele : "" ?>">
 
             <label for="inputDimension">Dimension</label>
-            <input type="text" name="dimension" value="<?= isset($dimensions) ? $dimensions : "" ?>">
+            <input type="text" name="dimension" value="<?= isset($dimension) ? $dimension : "" ?>">
 
             <label for="inputPrix">Prix</label>
             <input type="number" name="prix" value="<?= isset($prix) ? $prix : "" ?>">
 
-            <input type="submit" value="Ajouter le produit">
+            <input type="submit" value="Modifier le produit">
         </div>
     </form>
+    </div>
 </body>
-
 </html>

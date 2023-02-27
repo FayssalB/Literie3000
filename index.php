@@ -6,29 +6,9 @@ $query = $db->query("SELECT * from matelas");
 $matelas = $query->fetchAll(PDO::FETCH_ASSOC);
 
 var_dump($_POST);
-
+include("templates/header.php");
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/main.css">
-    <title>Literie</title>
-</head>
-
-<body>
-    <header>
-        <div>Literie3000</div>
-        <div>
-            <ul>
-                <li><a href="">Nos produits</a></li>
-            </ul>
-        </div>
-    </header>
     <div class="container">
         <!-- <pre><?= var_dump($matelas) ?></pre>  -->
         <h1>Nos produits</h1>
